@@ -48,7 +48,7 @@ else:
 
     if sp:
         # Create a sidebar dropdown navigation menu
-        menu = st.sidebar.selectbox("Select a section", ["Top Tracks", "Top Artists"])
+        menu = st.sidebar.selectbox("Select a section", ["Top Tracks", "Top Artists", "Currently Playing"])
 
         if menu == "Top Tracks":
             st.header("Your Top Tracks")
@@ -75,3 +75,21 @@ else:
             # Display top artists in Streamlit
             for artist in artist_data:
                 st.image(artist['image_url'], caption=artist['name'], width=400)
+
+        elif menu == "Currently Playing":
+            st.header("Current Playing")
+            current_track = sp.current_user_playing_track()
+            if current_track is not None:
+                track_data = {
+                    'name': current_track['item']['name'],
+                    'artist': current_track['item']['artists'][0]['name'],
+                    'album': current_track['item']['album']['name'],
+                    'popularity': current_track['item']['popularity'],
+                    'album_art': current_track['item']['album']['images'][0]['url']
+                }
+                st.image(track_data['album_art'], caption=track_data['name'], width=400)
+                st.write(track_data['name'])
+                st.write(track_data['artist'])
+                st.write(track_data['album'])
+            else:
+                st.write("You are not listening to anything currently!")
