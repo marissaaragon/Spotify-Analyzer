@@ -61,7 +61,7 @@ else:
             plt.figure(figsize=(10, 6))
             sns.set(style="whitegrid")
             bar_plot = sns.barplot(x='name', y='popularity', data=df_tracks, palette="viridis")
-            bar_plot.set_title("Top 20 Tracks by Popularity")
+            bar_plot.set_title("Your Top 20 Tracks and their Popularity")
             bar_plot.set_xlabel("Track Name")
             bar_plot.set_ylabel("Popularity")
             plt.xticks(rotation=45, ha="right")
