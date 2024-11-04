@@ -15,20 +15,16 @@ CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 REDIRECT_URI = "https://spotify-analyzer-777.streamlit.app/callback"
 
-# Check if CLIENT_ID and CLIENT_SECRET are loaded correctly
+st.title("Spotify Authentication Test")
+
 if CLIENT_ID is None or CLIENT_SECRET is None:
     st.error("Missing CLIENT_ID or CLIENT_SECRET. Please check your environment variables.")
 else:
-    st.write("Starting Spotify authentication process...")
-
-    # Spotify API authentication
     sp_oauth = SpotifyOAuth(client_id=CLIENT_ID,
                             client_secret=CLIENT_SECRET,
                             redirect_uri=REDIRECT_URI,
                             scope="user-top-read")
-
-    # Check the URL parameters for the authorization code
-    query_params = st.experimental_get_query_params()  # Update to st.query_params
+    query_params = st.experimental_get_query_params()
     auth_code = query_params.get("code", None)
 
     if auth_code:
@@ -38,15 +34,13 @@ else:
             st.write("Authorization successful! You can now see your top tracks.")
         except Exception as e:
             st.error(f"Error: {e}")
-        else:
-            sp = None
+        sp = None
     else:
         token_info = sp_oauth.get_cached_token()
-        sp = None
-
         if not token_info:
             auth_url = sp_oauth.get_authorize_url()
             st.write(f"Please authorize access by visiting this URL: [Authorize Spotify]({auth_url})")
+            sp = None
         else:
             sp = spotipy.Spotify(auth=token_info['access_token'])
             st.write("You are already authorized. Here are your top tracks.")
