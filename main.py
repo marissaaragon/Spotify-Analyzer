@@ -50,29 +50,31 @@ else:
             st.write("You are already authorized. Here are your top tracks.")
 
     if sp:
-        st.write("Retrieving data...")
+        menu = st.sidebar.radio("Go to", ["Top Tracks", "Top Artists"])
 
-        # Get user top tracks and popularity
-        top_tracks = sp.current_user_top_tracks(limit=20)
-        # Create DataFrame
-        tracks_data = [{'name': track['name'], 'popularity': track['popularity']} for track in top_tracks['items']]
-        df_tracks = pd.DataFrame(tracks_data)
+        if menu == "Top Tracks":
+            # Get user top tracks and popularity
+            top_tracks = sp.current_user_top_tracks(limit=20)
+            # Create DataFrame
+            tracks_data = [{'name': track['name'], 'popularity': track['popularity']} for track in top_tracks['items']]
+            df_tracks = pd.DataFrame(tracks_data)
 
-        # Display top tracks in Streamlit
-        st.title("Spotify Analyzer")
-        st.header("Your Top Tracks")
-        st.dataframe(df_tracks)
+            # Display top tracks in Streamlit
+            st.title("Spotify Analyzer")
+            st.header("Your Top Tracks")
+            st.dataframe(df_tracks)
 
-        # Plot popularity of top tracks
-        fig, ax = plt.subplots()
-        sns.barplot(x='popularity', y='name', data=df_tracks, ax=ax)
-        st.pyplot(fig)
+            # Plot popularity of top tracks
+            fig, ax = plt.subplots()
+            sns.barplot(x='popularity', y='name', data=df_tracks, ax=ax)
+            st.pyplot(fig)
 
-        # Get top artists and images
-        top_artists = sp.current_user_top_artists(limit=10)
-        artist_data = [{'name': artist['name'], 'image_url': artist['images'][0]['url']} for artist in top_artists['items']]
+        elif menu == "Top Artists":
+            # Get top artists and images
+            top_artists = sp.current_user_top_artists(limit=10)
+            artist_data = [{'name': artist['name'], 'image_url': artist['images'][0]['url']} for artist in top_artists['items']]
 
-        # Display top artists in Streamlit
-        st.header("Your Top Artists")
-        for artist in artist_data:
-            st.image(artist['image_url'], caption=artist['name'], width=150)
+            # Display top artists in Streamlit
+            st.header("Your Top Artists")
+            for artist in artist_data:
+                st.image(artist['image_url'], caption=artist['name'], width=150)
