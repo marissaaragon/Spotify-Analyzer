@@ -68,7 +68,7 @@ else:
             st.pyplot(plt)
 
         elif menu == "Top Artists":
-            st.header("Your Top Artists")
+            st.header("Your Top 10 Artists")
             # Get top artists and images
             top_artists = sp.current_user_top_artists(limit=10)
             artist_data = [{'name': artist['name'], 'image_url': artist['images'][0]['url']} for artist in top_artists['items']]
