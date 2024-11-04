@@ -52,18 +52,20 @@ else:
 
         if menu == "Top Tracks":
             st.header("Your Top Tracks")
+            # Create data frame
             top_tracks = sp.current_user_top_tracks(limit=20)
             tracks_data = [{'name': track['name'], 'popularity': track['popularity']} for track in top_tracks['items']]
             df_tracks = pd.DataFrame(tracks_data)
-            plt.figure(figsize=(10, 6))
-            sns.set(style="whitegrid")
-            bar_plot = sns.barplot(x='popularity', y='name', data=df_tracks, palette="viridis")
+
+            # Create Plot
+            plt.figure(figsize=(10, 6)) sns.set(style="whitegrid")
+            bar_plot = sns.barplot(x='name', y='popularity', data=df_tracks, palette="viridis")
             bar_plot.set_title("Top 20 Tracks by Popularity")
-            bar_plot.set_xlabel("Popularity")
-            bar_plot.set_ylabel("Track Name")
-            plt.xticks(rotation=45)
+            bar_plot.set_xlabel("Track Name")
+            bar_plot.set_ylabel("Popularity")
+            plt.xticks(rotation=90)
             for index, value in enumerate(df_tracks['popularity']):
-                bar_plot.text(value, index, f'{value}', color='black', ha="center")
+                bar_plot.text(index, value, f'{value}', color='black', ha="center")
             st.pyplot(plt)
 
         elif menu == "Top Artists":
