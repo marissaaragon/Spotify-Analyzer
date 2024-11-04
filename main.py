@@ -55,7 +55,6 @@ else:
             top_tracks = sp.current_user_top_tracks(limit=20)
             tracks_data = [{'name': track['name'], 'popularity': track['popularity']} for track in top_tracks['items']]
             df_tracks = pd.DataFrame(tracks_data)
-            st.dataframe(df_tracks)
             plt.figure(figsize=(10, 6))
             sns.set(style="whitegrid")
             bar_plot = sns.barplot(x='popularity', y='name', data=df_tracks, palette="viridis")
