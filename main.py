@@ -51,7 +51,7 @@ else:
         menu = st.sidebar.selectbox("Select a section", ["Top Tracks", "Top Artists", "Currently Playing"])
 
         if menu == "Top Tracks":
-            st.header("Your Top Tracks")
+            st.title("Your Top Tracks")
             # Create data frame
             top_tracks = sp.current_user_top_tracks(limit=20)
             tracks_data = [{'name': track['name'], 'popularity': track['popularity']} for track in top_tracks['items']]
@@ -68,7 +68,7 @@ else:
             st.pyplot(plt)
 
         elif menu == "Top Artists":
-            st.header("Your Top 10 Artists")
+            st.title("Your Top 10 Artists")
             # Get top artists and images
             top_artists = sp.current_user_top_artists(limit=10)
             artist_data = [{'name': artist['name'], 'image_url': artist['images'][0]['url']} for artist in top_artists['items']]
