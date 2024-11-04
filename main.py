@@ -33,7 +33,7 @@ else:
         try:
             token_info = sp_oauth.get_access_token(auth_code[0], as_dict=False)
             sp = spotipy.Spotify(auth=token_info)
-            st.success("Authorization successful! You can now see your data.")
+            st.success("Authorization successful! Close this page. Return to other page and refresh.")
         except Exception as e:
             st.error(f"Error: {e}")
         sp = None
