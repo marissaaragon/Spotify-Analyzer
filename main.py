@@ -13,17 +13,21 @@ load_dotenv()
 # Get variables from env
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
-REDIRECT_URI = "https://spotify-analyzer-777.streamlit.app/callback"
+REDIRECT_URI = "https://spotify-analyzer-777.streamlit.app"  # Redirect URI should point to the main app
 
-st.title("Spotify Authentication Test")
-
+# Check if CLIENT_ID and CLIENT_SECRET are loaded correctly
 if CLIENT_ID is None or CLIENT_SECRET is None:
     st.error("Missing CLIENT_ID or CLIENT_SECRET. Please check your environment variables.")
 else:
+    st.write("Starting Spotify authentication process...")
+
+    # Spotify API authentication
     sp_oauth = SpotifyOAuth(client_id=CLIENT_ID,
                             client_secret=CLIENT_SECRET,
                             redirect_uri=REDIRECT_URI,
                             scope="user-top-read")
+
+    # Check the URL parameters for the authorization code
     query_params = st.experimental_get_query_params()
     auth_code = query_params.get("code", None)
 
