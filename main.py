@@ -23,7 +23,7 @@ else:
     sp_oauth = SpotifyOAuth(client_id=CLIENT_ID,
                             client_secret=CLIENT_SECRET,
                             redirect_uri=REDIRECT_URI,
-                            scope="user-top-read")
+                            scope="user-read-currently-playing user-top-read")
 
     # Check the URL parameters for the authorization code
     query_params = st.experimental_get_query_params()
