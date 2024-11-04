@@ -6,7 +6,6 @@ import seaborn as sns
 import streamlit as st
 from dotenv import load_dotenv
 from spotipy.oauth2 import SpotifyOAuth
-from collections import Counter
 
 # Load IDs from .env file
 load_dotenv()
@@ -14,7 +13,7 @@ load_dotenv()
 # Get variables from env
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
-REDIRECT_URI = "http://spotify-analyzer-777.streamlit.app/callback"
+REDIRECT_URI = "https://your-app-name.streamlit.app/callback"
 
 # Check if CLIENT_ID and CLIENT_SECRET are loaded correctly
 if CLIENT_ID is None or CLIENT_SECRET is None:
@@ -34,8 +33,8 @@ else:
         st.write(f"Please authorize access by visiting this URL: [Authorize Spotify]({auth_url})")
         auth_code = st.text_input("Enter the URL you were redirected to: ", value="")
         if auth_code:
-            token_info = sp_oauth.get_access_token(auth_code)
-            sp = spotipy.Spotify(auth=token_info['access_token'])
+            token_info = sp_oauth.get_access_token(auth_code, as_dict=False)
+            sp = spotipy.Spotify(auth=token_info)
             st.write("Authorization successful! You can now see your top tracks.")
         else:
             sp = None
