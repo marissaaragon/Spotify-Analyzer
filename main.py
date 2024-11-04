@@ -77,7 +77,7 @@ else:
                 st.image(artist['image_url'], caption=artist['name'], width=400)
 
         elif menu == "Currently Playing":
-            st.header("Currently Playing...")
+            st.title("Currently Playing...")
             current_track = sp.current_user_playing_track()
             if current_track is not None:
                 track_data = {
