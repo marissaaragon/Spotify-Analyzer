@@ -88,8 +88,8 @@ else:
                     'album_art': current_track['item']['album']['images'][0]['url']
                 }
                 st.image(track_data['album_art'], width=400)
-                st.title(f"Title: {track_data['name']}")
-                st.title(f"Artist: {track_data['artist']}")
-                st.title(f"Album: {track_data['album']}")
+                st.header(f"Title: {track_data['name']}")
+                st.header(f"Artist: {track_data['artist']}")
+                st.header(f"Album: {track_data['album']}")
             else:
-                st.title("You are not listening to anything currently!")
+                st.header("You are not listening to anything currently!")
