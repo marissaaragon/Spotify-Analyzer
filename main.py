@@ -50,7 +50,7 @@ else:
             st.write("You are already authorized. Here are your top tracks.")
 
     if sp:
-        menu = st.selectbox("Select a section", ["Top Tracks", "Top Artists"])
+        menu = st.sidebar.selectbox("Select a section", ["Top Tracks", "Top Artists"])
 
         if menu == "Top Tracks":
             # Get user top tracks and popularity
