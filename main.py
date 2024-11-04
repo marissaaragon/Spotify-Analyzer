@@ -74,4 +74,4 @@ else:
             artist_data = [{'name': artist['name'], 'image_url': artist['images'][0]['url']} for artist in top_artists['items']]
             # Display top artists in Streamlit
             for artist in artist_data:
-                st.image(artist['image_url'], caption=artist['name'], width=150)
+                st.image(artist['image_url'], caption=artist['name'], width=400)
