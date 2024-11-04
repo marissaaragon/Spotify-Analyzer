@@ -87,9 +87,9 @@ else:
                     'popularity': current_track['item']['popularity'],
                     'album_art': current_track['item']['album']['images'][0]['url']
                 }
-                st.image(track_data['album_art'], caption=track_data['name'], width=400)
-                st.write(track_data['name'])
-                st.write(track_data['artist'])
-                st.write(track_data['album'])
+                st.image(track_data['album_art'], width=400)
+                st.write(f"Track Name: {track_data['name']}")
+                st.write(f"Artist: {track_data['artist']}")
+                st.write(f"Album: {track_data['album']}")
             else:
                 st.write("You are not listening to anything currently!")
