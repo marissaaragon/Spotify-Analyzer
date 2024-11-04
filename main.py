@@ -6,6 +6,7 @@ import seaborn as sns
 import streamlit as st
 from dotenv import load_dotenv
 from spotipy.oauth2 import SpotifyOAuth
+from urllib.parse import urlparse, parse_qs
 
 # Load IDs from .env file
 load_dotenv()
@@ -13,7 +14,7 @@ load_dotenv()
 # Get variables from env
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
-REDIRECT_URI = "https://spotify-analyzer-777.streamlit.app/callback"
+REDIRECT_URI = "https://spotify-analyzer-777.streamlit.app"
 
 # Check if CLIENT_ID and CLIENT_SECRET are loaded correctly
 if CLIENT_ID is None or CLIENT_SECRET is None:
@@ -27,20 +28,22 @@ else:
                             redirect_uri=REDIRECT_URI,
                             scope="user-top-read")
 
-    token_info = sp_oauth.get_cached_token()
-    sp = None  # Initialize sp to ensure it has a default value
+    # Check the URL parameters for the authorization code
+    query_params = st.experimental_get_query_params()
+    if "code" in query_params:
+        auth_code = query_params["code"][0]
+        try:
+            token_info = sp_oauth.get_access_token(auth_code, as_dict=False)
+            sp = spotipy.Spotify(auth=token_info)
+            st.write("Authorization successful! You can now see your top tracks.")
+        except Exception as e:
+            st.error(f"Error: {e}")
+        else:
+            sp = None
 
     if not token_info:
         auth_url = sp_oauth.get_authorize_url()
         st.write(f"Please authorize access by visiting this URL: [Authorize Spotify]({auth_url})")
-        auth_code = st.text_input("Enter the URL you were redirected to: ", value="")
-        if auth_code:
-            try:
-                token_info = sp_oauth.get_access_token(auth_code, as_dict=False)
-                sp = spotipy.Spotify(auth=token_info)
-                st.write("Authorization successful! You can now see your top tracks.")
-            except Exception as e:
-                st.error(f"Error: {e}")
     else:
         sp = spotipy.Spotify(auth=token_info['access_token'])
         st.write("You are already authorized. Here are your top tracks.")
