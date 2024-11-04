@@ -13,7 +13,7 @@ load_dotenv()
 # Get variables from env
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
-REDIRECT_URI = "https://your-app-name.streamlit.app/callback"
+REDIRECT_URI = "http://spotify-analyzer-777.streamlit.app/callback"
 
 # Check if CLIENT_ID and CLIENT_SECRET are loaded correctly
 if CLIENT_ID is None or CLIENT_SECRET is None:
