@@ -64,9 +64,7 @@ else:
             bar_plot.set_title("Top 20 Tracks by Popularity")
             bar_plot.set_xlabel("Track Name")
             bar_plot.set_ylabel("Popularity")
-            plt.xticks(rotation=90)
-            for index, value in enumerate(df_tracks['popularity']):
-                bar_plot.text(index, value, f'{value}', color='black', ha="center")
+            plt.xticks(rotation=45, ha="right")
             st.pyplot(plt)
 
         elif menu == "Top Artists":
