@@ -90,6 +90,6 @@ else:
                 st.image(track_data['album_art'], width=400)
                 st.header(f"{track_data['name']}")
                 st.header(f"by {track_data['artist']}")
-                st.header(f"Album: {track_data['album']}")
+                st.header(f"Album - {track_data['album']}")
             else:
                 st.header("You are not listening to anything currently!")
