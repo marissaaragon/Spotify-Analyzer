@@ -92,4 +92,4 @@ else:
                 st.title(f"Artist: {track_data['artist']}")
                 st.title(f"Album: {track_data['album']}")
             else:
-                st.write("You are not listening to anything currently!")
+                st.title("You are not listening to anything currently!")
