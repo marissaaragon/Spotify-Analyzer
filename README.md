@@ -11,3 +11,8 @@ With Spotify Analyzer, users can:
 
 ## Usage 
 You must have a Spotify account. To access the live version of the app, simply visit [Spotify Analyzer](https://spotify-analyzer-777.streamlit.app/).
+
+## Examples
+![](/ss/Screenshot 2024-11-27 at 8.43.54 PM.png)
+![](ss/Screenshot 2024-11-27 at 8.43.59 PM.png)
+![](ss/Screenshot 2024-11-27 at 8.44.43 PM.png)
